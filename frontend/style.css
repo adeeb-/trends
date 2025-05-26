@@ -1,0 +1,91 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+#category-filters {
+    margin-bottom: 20px;
+}
+
+#category-filters button {
+    margin-right: 10px;
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#category-filters button:hover {
+    background-color: #e9e9e9;
+}
+
+#trends-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.trend-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px; /* Redundant due to gap, but can stay */
+    width: calc(33.333% - 20px); /* Adjust for 3 columns, considering gap */
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.trend-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Make the whole card clickable */
+}
+
+.trend-card h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.trend-card p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Trend Detail Page */
+#trend-name {
+    color: #007bff;
+}
+
+.chart-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto; /* Center the chart */
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+canvas#trend-chart {
+    width: 100% !important; /* Important to override inline styles from Chart.js if any */
+    height: auto !important; /* Maintain aspect ratio */
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
