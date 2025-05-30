@@ -64,8 +64,8 @@ app.get('/', (req, res) => {
 app.get('/api/hn/topstories', async (req, res) => {
     // Allow client to specify a limit, default to 15, max 50 for safety
     const limitQuery = parseInt(req.query.limit);
-    const numberOfStories = (isNaN(limitQuery) || limitQuery <= 0) ? 15 : Math.min(limitQuery, 50); 
-    
+    const numberOfStories = (isNaN(limitQuery) || limitQuery <= 0) ? 15 : Math.min(limitQuery, 50);
+
     console.log(`Attempting to fetch top ${numberOfStories} Hacker News stories...`);
 
     try {
@@ -75,7 +75,7 @@ app.get('/api/hn/topstories', async (req, res) => {
             console.warn('No story IDs were returned from getTopStoryIds.');
             return res.status(500).json({ message: 'Could not fetch story IDs from Hacker News.' });
         }
-        
+
         // Slice to get only the number of stories we need
         const topStoryIdsToFetch = storyIds.slice(0, numberOfStories);
         console.log(`Fetching details for ${topStoryIdsToFetch.length} story IDs.`);

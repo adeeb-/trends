@@ -96,7 +96,7 @@ def update_trends_with_google_trends():
     """Fetches Google Trends data for each trend in the database."""
     print("Starting Google Trends data update...")
     pytrends = TrendReq(hl='en-US', tz=360)
-    
+
     with app.app_context(): # Ensure we're within Flask app context for db operations
         trends = Trend.query.all()
         if not trends:
@@ -115,11 +115,11 @@ def update_trends_with_google_trends():
                 if not interest_df.empty and trend_item.name in interest_df.columns and not interest_df[trend_item.name].is_monotonic_increasing and not interest_df[trend_item.name].is_monotonic_decreasing and interest_df[trend_item.name].nunique() > 1 : # check if series is not all zeros.
                     # Reset index to make 'date' a column
                     interest_df.reset_index(inplace=True)
-                    
+
                     # Select only the 'date' and the keyword's interest column
                     # and rename keyword column to 'value' for consistent output
                     interest_df = interest_df[['date', trend_item.name]].rename(columns={trend_item.name: 'value'})
-                    
+
                     # Format data
                     formatted_data = []
                     for index, row in interest_df.iterrows():
@@ -127,7 +127,7 @@ def update_trends_with_google_trends():
                             'date': row['date'].strftime('%Y-%m-%d'),
                             'value': int(row['value'])
                         })
-                    
+
                     trend_item.interest_over_time = json.dumps(formatted_data)
                     print(f"Successfully updated data for {trend_item.name}")
 
@@ -147,11 +147,11 @@ def update_trends_with_google_trends():
                 print(f"An error occurred while fetching data for {trend_item.name}: {e}")
                 db.session.rollback()
                 # Optionally, store empty data or keep old data
-                # trend_item.interest_over_time = json.dumps([]) 
+                # trend_item.interest_over_time = json.dumps([])
                 # db.session.add(trend_item)
                 # db.session.commit()
                 continue # Skip to the next trend
-        
+
         print("Google Trends data update completed.")
 
 @app.cli.command('update-gtrends')
